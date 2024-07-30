@@ -21,7 +21,7 @@ import { commonMessage } from '@locales/intl';
 import { lectureState } from '@constants/masterData';
 import useMoneyUnit from '@hooks/useMoneyUnit';
 import { Tag } from 'antd';
-import dayjs from 'dayjs'; // Import statement for dayjs
+import dayjs from 'dayjs'; 
 
 const messages = defineMessages({
     objectName: 'Khóa học',
@@ -107,13 +107,13 @@ const CourseListPage = () => {
             title: 'Ngày bắt đầu',
             dataIndex: 'dateRegister',
             width: 150,
-            render: (dateRegister) => dayjs(dateRegister).isValid() ? dayjs(dateRegister).format('DD/MM/YYYY') : 'Invalid Date',
+            render: (dateRegister) => dayjs(dateRegister, 'DD/MM/YYYY HH:mm:ss').isValid() ? dayjs(dateRegister, 'DD/MM/YYYY HH:mm:ss').format('DD/MM/YYYY') : 'Invalid Date',
         },
         {
             title: 'Ngày kết thúc',
             dataIndex: 'dateEnd',
             width: 150,
-            render: (dateEnd) => dayjs(dateEnd).isValid() ? dayjs(dateEnd).format('DD/MM/YYYY') : 'Invalid Date',
+            render: (dateEnd) => dayjs(dateEnd, 'DD/MM/YYYY HH:mm:ss').isValid() ? dayjs(dateEnd, 'DD/MM/YYYY HH:mm:ss').format('DD/MM/YYYY') : 'Invalid Date',
         },
         {
             title: 'Tình trạng',

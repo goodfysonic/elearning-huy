@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom'; // Thêm useParams
 import routes from './routes';
 import apiConfig from '@constants/apiConfig';
 import CourseForm from './CourseForm';
@@ -12,7 +12,7 @@ import useSaveBase from '@hooks/useSaveBase';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import { commonStatus } from '@constants';
 
-
+ 
 const messages = defineMessages({
     objectName: 'Khóa học',
 });
@@ -20,12 +20,14 @@ const messages = defineMessages({
 const CourseSavePage = () => {
     const translate = useTranslate();
     const navigate = useNavigate();
+    const { id: courseId } = useParams(); // Lấy courseId từ URL
+    const [courseData, setCourseData] = useState(null);
+    const isEditing = Boolean(courseId); // Xác định là edit hay là create
     const {
         detail,
         mixinFuncs,
         loading,
         setIsChangedFormValues,
-        isEditing,
         title,
     } = useSaveBase({
         apiConfig: {
@@ -59,10 +61,13 @@ const CourseSavePage = () => {
     });
 
     useEffect(() => {
-        if (isEditing && detail.id) {
-            mixinFuncs.fetchDetail(detail.id);
+        if (courseId) {
+            fetch(`/api/courses/${courseId}`)
+                .then(response => response.json())
+                .then(data => setCourseData(data))
+                .catch(error => console.error('Error fetching course data:', error));
         }
-    }, [isEditing, detail.id, mixinFuncs]);
+    }, [courseId]);
 
     return (
         <PageWrapper
@@ -77,6 +82,7 @@ const CourseSavePage = () => {
             title={title}
         >
             <CourseForm
+                courseId={courseId} // Truyền courseId vào Form
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail || {}}
                 formId={mixinFuncs.getFormId()}
