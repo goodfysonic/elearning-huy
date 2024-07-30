@@ -1,0 +1,117 @@
+.subjectContainer {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+
+    .subjectCard {
+        background: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .subjectForm {
+        .ant-row {
+            margin-bottom: 16px;
+        }
+
+        .ant-form-item {
+            margin-bottom: 16px;
+        }
+
+        .ant-input,
+        .ant-select-selector {
+            border-radius: 4px;
+            border: 1px solid #d9d9d9;
+        }
+
+        .ant-btn-primary {
+            background-color: #1890ff;
+            border-color: #1890ff;
+            border-radius: 4px;
+
+            &:hover,
+            &:focus {
+                background-color: #40a9ff;
+                border-color: #40a9ff;
+            }
+        }
+
+        .ant-btn-default {
+            margin-left: 8px;
+            border-radius: 4px;
+        }
+
+        .footer-card-form {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+
+            .ant-btn {
+                margin-left: 8px;
+            }
+
+            .ant-btn:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .subjectContainer {
+        padding: 10px;
+
+        .subjectCard {
+            padding: 15px;
+        }
+
+        .subjectForm {
+            .footer-card-form {
+                flex-direction: column;
+                align-items: center;
+
+                button {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    .subjectContainer {
+        background-color: #333;
+        color: #fff;
+
+        .subjectCard {
+            background-color: #424242;
+            color: #fff;
+
+            .ant-input,
+            .ant-select-selector {
+                background-color: #616161;
+                border-color: #424242;
+                color: #fff;
+            }
+
+            .ant-form-item-label > label {
+                color: #fff;
+            }
+        }
+
+        .ant-btn-primary {
+            background-color: #1890ff;
+            border-color: #1890ff;
+
+            &:hover,
+            &:focus {
+                background-color: #40a9ff;
+                border-color: #40a9ff;
+            }
+        }
+    }
+}
